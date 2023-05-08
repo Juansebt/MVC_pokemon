@@ -1,6 +1,8 @@
 <?php
 namespace modelo;
 
+use Exception;
+
 include_once "conexion.php";
 
 class Rol
@@ -17,6 +19,15 @@ class Rol
 
     function  create()
     {
+        try {
+            $sql = $this->conexion->getCon()->prepare("INSERT INTO roles(nombreRol,estado) VALUES (?,?)");
+            $sql->bindParam(1, $this->nombreRol);
+            $sql->bindParam(2, "A");
+            $sql->execute();
+            return "Rol Creado";
+        } catch (Exception $e) {
+            return "Error: " . $e->getMessage();
+        }
         
     }
 
