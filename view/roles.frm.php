@@ -1,6 +1,6 @@
 <?php include_once "header.php"; ?>
 <!-- //Formulario -->
-<form action="#" method="post" id="rolesFrm">
+<form class="border rounded m-5 p-5" id="rolesFrm">
     <div class="row my-5">
         <div class="col-12">
             <h1 class="text-center">Formulario Roles</h1>
@@ -12,7 +12,7 @@
             <input class="form-control" type="text" id="txtNombre" name="txtNombre">
         </div>
         <div class="col-3 align-self-end">
-            <input class="btn btn-primary" type="submit" value="Registrar">
+            <input onclick="create()" class="btn btn-outline-primary" type="button" value="Registrar">
         </div>
     </div>
 </form>
