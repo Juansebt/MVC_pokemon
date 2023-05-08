@@ -1,5 +1,5 @@
 <?php
-include_once "./model/rol.php";
+include_once "../model/rol.php";
 
 // echo json_encode($_POST["txtRol"]);
 

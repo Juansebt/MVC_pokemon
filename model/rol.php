@@ -20,13 +20,12 @@ class Rol
     function  create()
     {
         try {
-            $sql = $this->conexion->getCon()->prepare("INSERT INTO roles(nombreRol,estado) VALUES (?,?)");
+            $sql = $this->conexion->getCon()->prepare("INSERT INTO roles(nombreRol,estado) VALUES (?,'A')");
             $sql->bindParam(1, $this->nombreRol);
-            $sql->bindParam(2, "A");
             $sql->execute();
             return "Rol Creado";
         } catch (Exception $e) {
-            return "Error: " . $e->getMessage();
+            return "Error Modelo: " . $e->getMessage();
         }
         
     }
