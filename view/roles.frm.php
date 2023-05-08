@@ -8,8 +8,8 @@
     </div>
     <div class="row d-flex justify-content-end">
         <div class="col-6">
-            <label class="form-label" for="txtNombre">Nombre del rol:</label>
-            <input class="form-control" type="text" id="txtNombre" name="txtNombre">
+            <label class="form-label" for="txtRol">Nombre del rol:</label>
+            <input class="form-control" type="text" id="txtRol" name="txtRol">
         </div>
         <div class="col-3 align-self-end">
             <input onclick="create()" class="btn btn-outline-primary" type="button" value="Registrar">

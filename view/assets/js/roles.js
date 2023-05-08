@@ -1,8 +1,8 @@
 // Funciones CRUD para el formulario Roles
 function create(){
-    let data = `txtRol = ${document.getElementById("txtNombre").value}`;
+    let data = `txtRol=${document.getElementById("txtRol").value}`;
     let option = {
-        method: "post",
+        method: "POST",
         headers: {
             "Content-Type":"application/x-www-form-urlencoded",
         },
