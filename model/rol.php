@@ -2,6 +2,7 @@
 namespace modelo;
 
 use Exception;
+use PDOException;
 
 include_once "conexion.php";
 
@@ -24,10 +25,22 @@ class Rol
             $sql->bindParam(1, $this->nombreRol);
             $sql->execute();
             return "Rol Creado";
-        } catch (Exception $e) {
+        } catch (PDOException $e) {
             return "Error Modelo: " . $e->getMessage();
         }
         
+    }
+
+    function read()
+    {
+        try {
+            $sql = $this->conexion->getCon()->prepare("SELECT * FROM roles");
+            $sql->execute();
+            $response = $sql->fetchAll(\PDO::FETCH_ASSOC);
+            return $response;
+        } catch (PDOException $e) {
+            return "Error: " . $e->getMessage();
+        }
     }
 
     /**
