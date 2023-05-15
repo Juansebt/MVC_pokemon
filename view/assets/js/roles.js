@@ -34,10 +34,10 @@ function read() {
                 tabla += `<td>
                             <div class="form-check form-switch d-flex justify-content-center">
                                 <input onclick="estadoRol('${element.estado}','${element.id}')" class="form-check-input" type="checkbox" id="switch+=${element.nombreRol}">
-                                <label class="form-check-label" for="flexSwitchCheckDefault">${element.estado}</label>
+                                <label class="form-check-label px-2" for="flexSwitchCheckDefault">${element.estado}</label>
                             </div>
                         </td>`;
-                tabla += `<td><a href="#"><i class="fa fa-edit text-warning"></i></a> <a href="#"><i class="fa fa-trash text-danger"></i></a></td>`;
+                tabla += `<td><a href="#"><i class="fa fa-edit text-warning"></i></a> <a href="#"><i class="fa fa-trash text-danger px-1"></i></a></td>`;
                 tabla += `</tr>`;
             });
             document.getElementById("tblRol").innerHTML = tabla;
@@ -51,10 +51,12 @@ function deletes() { }
 read();
 
 function estadoRol(estado, id) {
-    const data = {
-        id: id,
-        estado: estado,
-    };
+    let data = `id=${id}&estado=${estado}`;
+
+    // const data = {
+    //     id: id,
+    //     estado: estado,
+    // };
     
     let option = {
         method: "POST",
@@ -69,5 +71,6 @@ function estadoRol(estado, id) {
         .then((response) => response.json())
         .then((data) => {
             console.log(data);
+            read();
         });
 }
