@@ -1,6 +1,6 @@
 <?php include_once "header.php"; ?>
 <!-- //Formulario -->
-<form class="border rounded m-5 p-5" id="rolesFrm">
+<form class="border rounded m-4 p-5" id="rolesFrm">
     <div class="row my-5">
         <div class="col-12">
             <h1 class="text-center">Formulario Roles</h1>
@@ -23,7 +23,7 @@
                     <tr>
                         <th scope="col" width="10%">#</th>
                         <th scope="col" width="25%">Roles</th>
-                        <th scope="col" width="10%">Estado</th>
+                        <th scope="col" width="10%" >Estado</th>
                         <th scope="col" width="10%" >Opciones</th>
                     </tr>
                 </thead>
@@ -37,6 +37,7 @@
             </table>
         </div>
     </div>
+    <!-- <a onclick="actualizarEstado()" class="btn btn-outline-primary" href="#">Estado</a> -->
 </form>
 <!-- // Fin formulario -->
 <?php include_once "footer.php"; ?>
