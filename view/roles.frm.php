@@ -23,7 +23,7 @@
                     <tr>
                         <th scope="col" width="10%">#</th>
                         <th scope="col" width="25%">Roles</th>
-                        <th scope="col" width="10%" >Estado</th>
+                        <th scope="col" width="10%">Estado</th>
                         <th scope="col" width="10%" >Opciones</th>
                     </tr>
                 </thead>
