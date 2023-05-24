@@ -45,7 +45,25 @@ function read() {
         });
 }
 
-function update() { }
+function update() { 
+    let id = localStorage.id;
+    let nombreRol = document.getElementById("txtRolUpdate").value;
+    let data = `txtRol=${nombreRol}&id=${id}`;
+    const options = {
+        method: "POST",
+        body: data,
+        headers:{
+            "Content-Type": "application/x-www-form-urlencoded",
+        },
+    };
+    let url = "../controller/roles.update.php";
+    fetch(url,options)
+    .then((response) => response.json())
+    .then((data) => {
+        console.log(data);
+        read();
+    })
+}
 
 function deletes() { }
 
@@ -88,6 +106,7 @@ function estadoUpdate(id) {
     fetch(url)
     .then((response) => response.json())
     .then((data) => {
-        console.log(data);
+        document.getElementById("txtRolUpdate").value = data[0].nombreRol;
+        localStorage.id = data[0].id;
     });
 }
