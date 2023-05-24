@@ -37,7 +37,7 @@ function read() {
                                 <label class="form-check-label px-2" for="flexSwitchCheckDefault">${element.estado == 'A' ? 'Activo' : 'Inactivo'}</label>
                             </div>
                         </td>`;
-                tabla += `<td><a href="#"><i class="fa fa-edit text-warning"></i></a> <a href="#"><i class="fa fa-trash text-danger px-1"></i></a></td>`;
+                tabla += `<td><a onclick="estadoUpdate(${element.id})" data-bs-toggle="modal" data-bs-target="#updateModal"><i class="fa fa-edit text-warning"></i></a> <a href="#" data-bs-toggle="modal" data-bs-target="#deleteModal"><i class="fa fa-trash text-danger px-1"></i></a></td>`;
                 tabla += `</tr>`;
             });
             document.getElementById("tblRol").innerHTML = tabla;
@@ -81,4 +81,13 @@ function actualizarEstado() {
             estados[i].setAttribute("checked", "");
         }
     }
+}
+
+function estadoUpdate(id) {
+    let url = `../controller/roles.readid.php?id=${id}`;
+    fetch(url)
+    .then((response) => response.json())
+    .then((data) => {
+        console.log(data);
+    });
 }

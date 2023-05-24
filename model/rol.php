@@ -43,6 +43,15 @@ class Rol
         }
     }
 
+    function readId()
+    {
+        try {
+            $sql = $this->conexion->getCon()->prepare("SELECT * FROM roles WHERE id=?");
+        } catch (PDOException $e) {
+            return "Error: " . $e->getMessage();
+        }
+    }
+
     function estado()
     {
         try {
