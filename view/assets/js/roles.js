@@ -17,9 +17,13 @@ function create() {
     fetch(url, option)
         .then((response) => response.json())
         .then((data) => {
-            console.log(data);
+            // console.log(data);
+            alertify.success(data);
             read();
             eliminarRegistro1();
+        })
+        .catch((e) => {
+            alertify.error(e);
         });
 }
 
@@ -41,17 +45,69 @@ function read() {
                             </div>
                         </td>`;
                 tabla += `<td>
-                            <a onclick="estadoUpdate(${element.id})" data-bs-toggle="modal" data-bs-target="#updateModal">
-                                <i class="fa fa-edit text-warning"></i>
+                            <a onclick="estadoUpdate(${element.id})" data-bs-toggle="modal" data-bs-target="#updateModal" title="Modificar" class="btn btn-outline-warning">
+                                <i class="fa fa-edit"></i>
                             </a>
-                            <a onclick="estadoDelete(${element.id},'${element.nombreRol}')" data-bs-toggle="modal" data-bs-target="#deleteModal">
-                                <i class="fa fa-trash text-danger px-1"></i>
+                            <a onclick="estadoDelete(${element.id},'${element.nombreRol}')" data-bs-toggle="modal" data-bs-target="#deleteModal" title="Eliminar" class="btn btn-outline-danger">
+                                <i class="fa fa-trash px-1"></i>
                             </a>
                         </td>`;
                 tabla += `</tr>`;
             });
             document.getElementById("tblRol").innerHTML = tabla;
+            // alertify.warning("Roles cargados");
             actualizarEstado();
+            let table = new DataTable('#table', {
+                language: {
+                    url: './assets/es-ES.json',
+                },
+                dom: 'Bfrtip',
+                buttons: [
+                    {
+                        extend: "colvis",
+                        text: '<i class="fa-solid fa-filter text-primary"></i>',
+                        titleAttr: "Filtar",
+                        className: "btn colvisDataTable",
+                    },
+                    {
+                        extend: "excel",
+                        text: '<i class="fa-solid fa-file-excel text-success"></i>',
+                        titleAttr: "Excel",
+                        exportOptions: {
+                            columns: [0, 1, 2]
+                        },
+                        className: "btn excelDataTable",
+                    },
+                    {
+                        extend: "pdf",
+                        text: '<i class="fa-solid fa-file-pdf text-danger"></i>',
+                        titleAttr: "PDF",
+                        exportOptions: {
+                            columns: [0, 1, 2]
+                        },
+                        className: "btn pdfDataTable",
+                        download: "open",
+                    },
+                    {
+                        extend: "print",
+                        text: '<i class="fa-solid fa-print text-warning"></i>',
+                        titleAttr: "Imprimir",
+                        exportOptions: {
+                            columns: [0, 1, 2]
+                        },
+                        className: "btn printDataTable",
+                    },
+                    {
+                        extend: "copy",
+                        text: '<i class="fa-solid fa-copy text-dark"></i>',
+                        titleAttr: "Copiar",
+                        exportOptions: {
+                            columns: [0, 1, 2]
+                        },
+                        className: "btn copyDataTable",
+                    },
+                ]
+            });
         });
 }
 
@@ -70,9 +126,10 @@ function update() {
     fetch(url, options)
         .then((response) => response.json())
         .then((data) => {
-            console.log(data);
+            // console.log(data);
+            alertify.success(data);
             read();
-            eliminarRegistro2();
+            eliminarRegistro2(); //No funciona - corregir
         })
 }
 
@@ -89,11 +146,12 @@ function deletes() {
     };
 
     fetch(url, option)
-    .then((response) => response.json())
-    .then((data) => {
-        console.log(data);
-        read();
-    })
+        .then((response) => response.json())
+        .then((data) => {
+            // console.log(data);
+            alertify.success(data);
+            read();
+        })
 }
 
 read();
@@ -140,7 +198,7 @@ function estadoUpdate(id) {
         });
 }
 
-function estadoDelete(id,nombreRol) {
+function estadoDelete(id, nombreRol) {
     this.id = id;
     document.getElementById("textDelete").innerHTML = `¿Estás seguro de eliminar el rol: ${nombreRol}?`
 }

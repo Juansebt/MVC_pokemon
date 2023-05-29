@@ -6,6 +6,8 @@
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <link rel="shortcut icon" href="https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcSY7XohglwQzef6uz7q83YKW3ua6YgNS7vEGz3c2fobvx8lMtck-wkmro6r8PZXk2I7DN8&usqp=CAU" type="image/x-icon">
+    <!-- Jquery -->
+    <script src="./assets/js/jquery-3.6.0.js"></script>
     <!-- Bootstrap -->
     <link rel="stylesheet" href="./assets/css/bootstrap.css">
     <script src="./assets/js/bootstrap.js"></script>
@@ -13,7 +15,13 @@
     <link rel="stylesheet" href="./assets/css/all.css">
     <script src="./assets/js/all.js"></script>
     <!-- DataTables -->
-    
+    <link rel="stylesheet" href="./assets/css/datatables.css">
+    <script src="./assets/js/datatables.js"></script>
+    <!-- Alertify -->
+    <link rel="stylesheet" href="./assets/css/alertify.css">
+    <script src="./assets/js/alertify.js"></script>
+    <!-- Estilos personalizados -->
+    <link rel="stylesheet" href="./assets/css/styles.css">
     <title>Tienda - POKEMON</title>
 </head>
 

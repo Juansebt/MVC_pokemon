@@ -1,0 +1,15 @@
+.colvisDataTable {
+    background-color: lightskyblue !important;
+}
+.excelDataTable {
+    background-color: lightgreen !important;
+}
+.pdfDataTable {
+    background-color: lightpink !important;
+}
+.printDataTable {
+    background-color: lightyellow !important;
+}
+.copyDataTable {
+    background-color: aliceblue !important;
+}

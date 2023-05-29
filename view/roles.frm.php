@@ -12,13 +12,14 @@
             <input class="form-control" type="text" id="txtRol" name="txtRol">
         </div>
         <div class="col-3 align-self-end">
-            <input onclick="create()" class="btn btn-outline-primary" type="button" value="Registrar">
+            <!-- <input onclick="create()" class="btn btn-outline-primary" type="button" value="Registrar"> -->
+            <a onclick="create()" class="btn btn-outline-primary" type="button" value="Registrar"><i class="fa-solid fa-plus"></i> Registrar</a>
         </div>
     </div>
     <div class="row d-flex justify-content-center">
         <h2 class="mt-5 mb-5 text-center">Roles</h2>
         <div class="col-8">
-            <table class="table table-hover table-bordered text-center">
+            <table class="table table-hover table-bordered text-center" id="table">
                 <thead class="bg-dark text-white">
                     <tr>
                         <th scope="col" width="10%">#</th>
@@ -29,11 +30,11 @@
                 </thead>
                 <tbody id="tblRol">
                 </tbody>
-                <tfoot>
+                <!-- <tfoot>
                     <tr>
                         <td colspan="4">By: Juan Sebastián Laguna Yara</td>
                     </tr>
-                </tfoot>
+                </tfoot> -->
             </table>
         </div>
     </div>

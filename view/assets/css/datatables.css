@@ -460,6 +460,7 @@ table.dataTable td {
 .dataTables_wrapper .dataTables_filter {
   float: right;
   text-align: right;
+  padding-bottom: 13px;
 }
 .dataTables_wrapper .dataTables_filter input {
   border: 1px solid #aaa;
