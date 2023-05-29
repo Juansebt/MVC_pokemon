@@ -51,10 +51,10 @@ function update() {
     let data = `txtRol=${nombreRol}&id=${id}`;
     const options = {
         method: "POST",
-        body: data,
         headers:{
             "Content-Type": "application/x-www-form-urlencoded",
         },
+        body: data,
     };
     let url = "../controller/roles.update.php";
     fetch(url,options)

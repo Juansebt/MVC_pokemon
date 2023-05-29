@@ -46,7 +46,7 @@ class Rol
     function update()
     {
         try {
-            $sql = $this->conexion->getCon()->prepare("UPDATE rol SET nombreRol=? WHERE id=?");
+            $sql = $this->conexion->getCon()->prepare("UPDATE roles SET nombreRol=? WHERE id=?");
             $sql->bindParam(1,$this->nombreRol);
             $sql->bindParam(2,$this->id);
             $sql->execute();
