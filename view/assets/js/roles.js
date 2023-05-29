@@ -18,7 +18,8 @@ function create() {
         .then((response) => response.json())
         .then((data) => {
             console.log(data);
-            read()
+            read();
+            eliminarRegistro1();
         });
 }
 
@@ -71,6 +72,7 @@ function update() {
         .then((data) => {
             console.log(data);
             read();
+            eliminarRegistro2();
         })
 }
 
@@ -141,4 +143,12 @@ function estadoUpdate(id) {
 function estadoDelete(id,nombreRol) {
     this.id = id;
     document.getElementById("textDelete").innerHTML = `¿Estás seguro de eliminar el rol: ${nombreRol}?`
+}
+
+function eliminarRegistro1() {
+    document.getElementById("txtRol").value = "";
+}
+
+function eliminarRegistro2() {
+    document.getElementById("txtRolUpdate").value = "";
 }
