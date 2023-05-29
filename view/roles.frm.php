@@ -61,8 +61,8 @@
                         </div>
                     </div>
                     <div class="modal-footer">
-                        <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Cerrar</button>
-                        <button onclick="update()" type="button" class="btn btn-warning text-white" data-bs-dismiss="modal">Modificar</button>
+                        <!-- <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Cerrar</button> -->
+                        <button onclick="update()" type="button" class="btn btn-outline-warning" data-bs-dismiss="modal">Modificar</button>
                     </div>
                 </div>
             </div>
@@ -77,15 +77,15 @@
             <div class="modal-dialog modal-lg">
                 <div class="modal-content">
                     <div class="modal-header bg-gradient bg-danger">
-                        <h1 class="modal-title fs-5 col-11 text-center ms-4" id="deleteModalLabel">Eliminar Rol</h1>
+                        <h1 class="modal-title fs-5 col-11 text-center fw-bold text-white ms-4" id="deleteModalLabel">Eliminar Rol</h1>
                         <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
                     </div>
-                    <div class="modal-body">
-                        ...
+                    <div class="modal-body text-center">
+                        <h4 id="textDelete"></h4>
                     </div>
                     <div class="modal-footer">
-                        <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Close</button>
-                        <button type="button" class="btn btn-primary">Save changes</button>
+                        <!-- <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Close</button> -->
+                        <button onclick="deletes()" type="button" class="btn btn-outline-danger" data-bs-dismiss="modal">Eliminar</button>
                     </div>
                 </div>
             </div>

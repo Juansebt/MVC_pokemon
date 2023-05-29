@@ -1,4 +1,6 @@
 // Funciones CRUD para el formulario Roles
+var id;
+
 function create() {
     let data = `txtRol=${document.getElementById("txtRol").value}`;
     let option = {
@@ -37,7 +39,14 @@ function read() {
                                 <label class="form-check-label px-2" for="flexSwitchCheckDefault">${element.estado == 'A' ? 'Activo' : 'Inactivo'}</label>
                             </div>
                         </td>`;
-                tabla += `<td><a onclick="estadoUpdate(${element.id})" data-bs-toggle="modal" data-bs-target="#updateModal"><i class="fa fa-edit text-warning"></i></a> <a href="#" data-bs-toggle="modal" data-bs-target="#deleteModal"><i class="fa fa-trash text-danger px-1"></i></a></td>`;
+                tabla += `<td>
+                            <a onclick="estadoUpdate(${element.id})" data-bs-toggle="modal" data-bs-target="#updateModal">
+                                <i class="fa fa-edit text-warning"></i>
+                            </a>
+                            <a onclick="estadoDelete(${element.id},'${element.nombreRol}')" data-bs-toggle="modal" data-bs-target="#deleteModal">
+                                <i class="fa fa-trash text-danger px-1"></i>
+                            </a>
+                        </td>`;
                 tabla += `</tr>`;
             });
             document.getElementById("tblRol").innerHTML = tabla;
@@ -45,19 +54,39 @@ function read() {
         });
 }
 
-function update() { 
+function update() {
     let id = localStorage.id;
     let nombreRol = document.getElementById("txtRolUpdate").value;
     let data = `txtRol=${nombreRol}&id=${id}`;
     const options = {
         method: "POST",
-        headers:{
+        headers: {
             "Content-Type": "application/x-www-form-urlencoded",
         },
         body: data,
     };
     let url = "../controller/roles.update.php";
-    fetch(url,options)
+    fetch(url, options)
+        .then((response) => response.json())
+        .then((data) => {
+            console.log(data);
+            read();
+        })
+}
+
+function deletes() {
+    let url = "../controller/roles.detele.php";
+    let data = `id=${this.id}`;
+
+    let option = {
+        method: "POST",
+        headers: {
+            "Content-Type": "application/x-www-form-urlencoded",
+        },
+        body: data,
+    };
+
+    fetch(url, option)
     .then((response) => response.json())
     .then((data) => {
         console.log(data);
@@ -65,13 +94,11 @@ function update() {
     })
 }
 
-function deletes() { }
-
 read();
 
 function estadoRol(estado, id) {
     let data = `id=${id}&estado=${estado}`;
-    
+
     let option = {
         method: "POST",
         headers: {
@@ -95,7 +122,7 @@ function actualizarEstado() {
     let labelEstado = document.getElementById("tblRol").getElementsByClassName("form-check-label");
 
     for (let i = 0; i < estados.length; i++) {
-        if(labelEstado[i].innerHTML == "Activo") {
+        if (labelEstado[i].innerHTML == "Activo") {
             estados[i].setAttribute("checked", "");
         }
     }
@@ -104,9 +131,14 @@ function actualizarEstado() {
 function estadoUpdate(id) {
     let url = `../controller/roles.readid.php?id=${id}`;
     fetch(url)
-    .then((response) => response.json())
-    .then((data) => {
-        document.getElementById("txtRolUpdate").value = data[0].nombreRol;
-        localStorage.id = data[0].id;
-    });
+        .then((response) => response.json())
+        .then((data) => {
+            document.getElementById("txtRolUpdate").value = data[0].nombreRol;
+            localStorage.id = data[0].id;
+        });
+}
+
+function estadoDelete(id,nombreRol) {
+    this.id = id;
+    document.getElementById("textDelete").innerHTML = `¿Estás seguro de eliminar el rol: ${nombreRol}?`
 }
