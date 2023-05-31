@@ -20,7 +20,7 @@ function create() {
             // console.log(data);
             alertify.success(data);
             read();
-            eliminarRegistro1();
+            eliminarRegistro();
         })
         .catch((e) => {
             alertify.error(e);
@@ -195,6 +195,7 @@ function estadoUpdate(id) {
         .then((data) => {
             document.getElementById("txtRolUpdate").value = data[0].nombreRol;
             localStorage.id = data[0].id;
+            limpiarCampoInput();
         });
 }
 
@@ -203,10 +204,22 @@ function estadoDelete(id, nombreRol) {
     document.getElementById("textDelete").innerHTML = `¿Estás seguro de eliminar el rol: ${nombreRol}?`
 }
 
-function eliminarRegistro1() {
-    document.getElementById("txtRol").value = "";
+function eliminarRegistro() {
+    let formulario = document.getElementById("rolesFrm");
+
+    // Recorre todos los elementos del formulario
+    for (let i = 0; i < formulario.elements.length; i++) {
+        let elemento = formulario.elements[i];
+
+        // Verifica si el elemento es un campo de texto, área de texto o un campo de contraseña
+        if (elemento.type === "text" || elemento.type === "textarea" || elemento.type === "password") {
+            elemento.value = ""; // Limpia el valor del campo
+        }
+    }
 }
 
-function eliminarRegistro2() {
-    document.getElementById("txtRolUpdate").value = "";
-}
+function limpiarCampoInput() {
+    let input = document.getElementById("txtRolUpdate");
+    input.value = "";
+  }
+  
