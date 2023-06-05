@@ -2,12 +2,18 @@
 var id;
 
 function create() {
-    let nombreRol = document.getElementById("txtRol").value;
-    if (nombreRol === ''){
-        alertify.error("Error, debes ingresar el nombre de un rol");
+    let nombrePro = document.getElementById("txtNombrePro").value;
+    let precioPro = document.getElementById("txtPrecioPro").value;
+    let cantidadPro = document.getElementById("txtCantidadPro").value;
+    let descripcionPro = document.getElementById("txtDescripPro").value;
+
+    if (nombrePro === '' || precioPro ==='' || cantidadPro === '' || descripcionPro === ''){
+        alertify.error("Los campos no se pueden ir vacios, ingresar los datos necesarios");
         return;
     }
-    let data = `txtRol=${nombreRol}`;
+
+    let data = `txtNombrePro=${nombrePro}&txtPrecioPro=${precioPro}&txtCantidadPro=${cantidadPro}&txtDescripPro=${descripcionPro}`;
+    
     let option = {
         method: "POST",
         headers: {
@@ -16,8 +22,7 @@ function create() {
         body: data,
     };
 
-    // let url = "../../../controller/roles.php" --> desde JS
-    let url = "../controller/roles.create.php" //desde el formulario
+    let url = "../controller/productos.create.php"; //desde el formulario
 
     fetch(url, option)
         .then((response) => response.json())
@@ -28,12 +33,14 @@ function create() {
             eliminarRegistro();
         })
         .catch((e) => {
+            console.log(e);
+            console.log(data);
             alertify.error(e);
         });
 }
 
 function read() {
-    let url = "../controller/roles.read.php";
+    let url = "../controller/productos.read.php";
     fetch(url)
         .then(response => response.json())
         .then((data) => {
@@ -42,10 +49,13 @@ function read() {
             data.forEach((element, index) => {
                 tabla += `<tr>`;
                 tabla += `<th scope="row">${index + 1}</th>`;
-                tabla += `<td>${element.nombreRol}</td>`;
+                tabla += `<td>${element.nombrePro}</td>`;
+                tabla += `<td>$${element.precioPro}</td>`;
+                tabla += `<td>${element.cantidadPro}</td>`;
+                tabla += `<td>${element.descripcionPro}</td>`;
                 tabla += `<td>
                             <div class="form-check form-switch d-flex justify-content-center">
-                                <input onclick="estadoRol('${element.estado}','${element.id}')" class="form-check-input" type="checkbox" id="switch+=${element.nombreRol}" style="border-color: springgreen; background-color: springgreen;">
+                                <input onclick="estadoRol('${element.estado}','${element.id}')" class="form-check-input" type="checkbox" id="switch+=${element.nombrePro}" style="border-color: springgreen; background-color: springgreen;">
                                 <label class="form-check-label px-2" for="flexSwitchCheckDefault">${element.estado == 'A' ? 'Activo' : 'Inactivo'}</label>
                             </div>
                         </td>`;
@@ -53,16 +63,17 @@ function read() {
                             <a onclick="estadoUpdate(${element.id})" data-bs-toggle="modal" data-bs-target="#updateModal" title="Modificar" class="btn btn-outline-warning">
                                 <i class="fa fa-edit"></i>
                             </a>
-                            <a onclick="estadoDelete(${element.id},'${element.nombreRol}')" data-bs-toggle="modal" data-bs-target="#deleteModal" title="Eliminar" class="btn btn-outline-danger">
+                            <a onclick="estadoDelete(${element.id},'${element.nombrePro}')" data-bs-toggle="modal" data-bs-target="#deleteModal" title="Eliminar" class="btn btn-outline-danger">
                                 <i class="fa fa-trash px-1"></i>
                             </a>
                         </td>`;
                 tabla += `</tr>`;
             });
-            document.getElementById("tblRol").innerHTML = tabla;
+            document.getElementById("tblProductos").innerHTML = tabla;
             // alertify.warning("Roles cargados");
             actualizarEstado();
-            let table = new DataTable('#table', {
+            //DataTable no funciona
+            let table = new DataTable('#tableProduct', {
                 language: {
                     url: './assets/es-ES.json',
                 },
@@ -79,7 +90,7 @@ function read() {
                         text: '<i class="fa-solid fa-file-excel text-success"></i>',
                         titleAttr: "Excel",
                         exportOptions: {
-                            columns: [0, 1, 2]
+                            columns: [0, 1, 2, 3, 4]
                         },
                         className: "btn excelDataTable",
                     },
@@ -88,7 +99,7 @@ function read() {
                         text: '<i class="fa-solid fa-file-pdf text-danger"></i>',
                         titleAttr: "PDF",
                         exportOptions: {
-                            columns: [0, 1, 2]
+                            columns: [0, 1, 2, 3, 4]
                         },
                         className: "btn pdfDataTable",
                         download: "open",
@@ -98,7 +109,7 @@ function read() {
                         text: '<i class="fa-solid fa-print text-warning"></i>',
                         titleAttr: "Imprimir",
                         exportOptions: {
-                            columns: [0, 1, 2]
+                            columns: [0, 1, 2, 3, 4]
                         },
                         className: "btn printDataTable",
                     },
@@ -107,7 +118,7 @@ function read() {
                         text: '<i class="fa-solid fa-copy text-dark"></i>',
                         titleAttr: "Copiar",
                         exportOptions: {
-                            columns: [0, 1, 2]
+                            columns: [0, 1, 2, 3, 4]
                         },
                         className: "btn copyDataTable",
                     },
@@ -118,8 +129,13 @@ function read() {
 
 function update() {
     let id = localStorage.id;
-    let nombreRol = document.getElementById("txtRolUpdate").value;
-    let data = `txtRol=${nombreRol}&id=${id}`;
+    let nombrePro = document.getElementById("txtNombreProUpdate").value;
+    let precioPro = document.getElementById("txtPrecioProUpdate").value;
+    let cantidadPro = document.getElementById("txtCantidadProUpdate").value;
+    let descripcionPro = document.getElementById("txtDescripcionProUpdate").value;
+
+    let data = `txtNombrePro=${nombrePro}&txtPrecioPro=${precioPro}&txtCantidadPro=${cantidadPro}&txtDescripPro=${descripcionPro}&id=${id}`;
+
     const options = {
         method: "POST",
         headers: {
@@ -127,7 +143,7 @@ function update() {
         },
         body: data,
     };
-    let url = "../controller/roles.update.php";
+    let url = "../controller/productos.update.php";
     fetch(url, options)
         .then((response) => response.json())
         .then((data) => {
@@ -138,7 +154,7 @@ function update() {
 }
 
 function deletes() {
-    let url = "../controller/roles.detele.php";
+    let url = "../controller/productos.delete.php";
     let data = `id=${this.id}`;
 
     let option = {
@@ -171,7 +187,7 @@ function estadoRol(estado, id) {
         body: data,
     };
 
-    let url = "../controller/roles.estado.php";
+    let url = "../controller/productos.estado.php";
     fetch(url, option)
         .then((response) => response.json())
         .then((data) => {
@@ -181,9 +197,9 @@ function estadoRol(estado, id) {
 }
 
 function actualizarEstado() {
-    let estados = document.getElementById("tblRol").getElementsByClassName("form-check-input");
+    let estados = document.getElementById("tblProductos").getElementsByClassName("form-check-input");
 
-    let labelEstado = document.getElementById("tblRol").getElementsByClassName("form-check-label");
+    let labelEstado = document.getElementById("tblProductos").getElementsByClassName("form-check-label");
 
     for (let i = 0; i < estados.length; i++) {
         if (labelEstado[i].innerHTML == "Activo") {
@@ -193,37 +209,41 @@ function actualizarEstado() {
 }
 
 function estadoUpdate(id) {
-    let url = `../controller/roles.readid.php?id=${id}`;
+    let url = `../controller/productos.readid.php?id=${id}`;
     fetch(url)
         .then((response) => response.json())
         .then((data) => {
-            document.getElementById("txtRolUpdate").value = data[0].nombreRol;
+            document.getElementById("txtNombreProUpdate").value = data[0].nombrePro;
+            document.getElementById("txtPrecioProUpdate").value = data[0].precioPro;
+            document.getElementById("txtCantidadProUpdate").value = data[0].cantidadPro;
+            document.getElementById("txtDescripcionProUpdate").value = data[0].descripcionPro;
             localStorage.id = data[0].id;
-            // limpiarCampoInput();
         });
 }
 
 function estadoDelete(id, nombreRol) {
     this.id = id;
-    document.getElementById("textDelete").innerHTML = `¿Estás seguro de eliminar el rol: ${nombreRol}?`
+    document.getElementById("textDelete").innerHTML = `¿Estás seguro de eliminar el producto: ${nombreRol}?`
 }
 
 function eliminarRegistro() {
-    let formulario = document.getElementById("rolesFrm");
+    let formulario = document.getElementById("productosFrm");
 
     // Recorre todos los elementos del formulario
     for (let i = 0; i < formulario.elements.length; i++) {
         let elemento = formulario.elements[i];
 
-        // Verifica si el elemento es un campo de texto, área de texto o un campo de contraseña
-        if (elemento.type === "text" || elemento.type === "textarea" || elemento.type === "password") {
+        // Verifica si el elemento es un campo de texto, área de texto, campo numerico o un campo de contraseña
+        if (elemento.type === "text" || elemento.type === "textarea" || elemento.type === "password" || elemento.type === "number") {
             elemento.value = ""; // Limpia el valor del campo
         }
     }
 }
 
-function limpiarCampoInput() {
-    let input = document.getElementById("txtRolUpdate");
-    input.value = "";
-  }
-  
+function limpiarCampoModal() {
+    const campos = document.querySelectorAll('input, textarea');
+
+    campos.forEach(campo => {
+        campo.value = '';
+    });
+}
